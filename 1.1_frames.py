@@ -1,5 +1,8 @@
 # FRAME IS JUST AN IMAGE
 # PROVE THAT A FRAME = IMAGE (MATRIX OF PIXDELS)
+# What you learn:
+# A frame is just an image
+# frame.shape → (height, width, channels)
 
 import cv2
 import matplotlib.pyplot as plt
