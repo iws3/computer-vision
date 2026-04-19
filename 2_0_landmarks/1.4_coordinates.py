@@ -45,12 +45,25 @@ while True:
 
     result=landmarker.detect_for_video(mp_image, timestamp)
     print(f"Observing the result object: {result}")
+    h, w, _=frame.shape
     
     if result.pose_landmarks:
         lm=result.pose_landmarks[0];
         # print nose and left wrist
         print("Nose:", lm[0].x, lm[0].y)
         print("Left wrist:", lm[15].x, lm[15].y)
+        
+        nose_x=int(lm[0].x*w)
+        nose_y=int(lm[0].y*h)
+        # get shoulder pixels (left 11, Right 12)
+        l_sh_x, l_sh_y=int(lm[11].x*w), int(lm[11].y*h)
+        r_sh_x, r_sh_y=int(lm[12].x*w), int(lm[12].y*h)
+        # drawing section
+        cv2.circle(frame, (nose_x, nose_y), 10, (255, 0,0), -1)
+        # draw a green line between shoulders
+        cv2.line(frame, (l_sh_x, l_sh_y), (r_sh_x, r_sh_y), (0,255,0), 3)
+        
+        
         
     cv2.imshow("Step 2: Coordinates", frame)
     
