@@ -32,6 +32,7 @@ landmarker=vision.PoseLandmarker.create_from_options(options)
 cap=cv2.VideoCapture(0)
 
 while True:
+    # This is a loop that runs roughly 30 times per second. Every "lap" of this loop is one single frame of video.
     ret, frame=cap.read()
     
     if not ret:
@@ -40,8 +41,10 @@ while True:
     mp_image=mp.Image(image_format=mp.ImageFormat.SRGB, data=rgb);
     
     timestamp=int(time.time() * 1000)
-    
+    # result.pose_landmarks: This is a big list of 33 points (nose, shoulders, elbows, etc.).
+
     result=landmarker.detect_for_video(mp_image, timestamp)
+    print(f"Observing the result object: {result}")
     
     if result.pose_landmarks:
         lm=result.pose_landmarks[0];
