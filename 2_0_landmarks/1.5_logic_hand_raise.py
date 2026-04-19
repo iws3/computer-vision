@@ -49,6 +49,7 @@ while True:
 
     cv2.imshow("Step 3: Hand Raise Detection", frame)
     if cv2.waitKey(1) & 0xFF == ord('q'): break
+    # OBSERVATION: The hand is considered "raised" if the y-coordinate of the wrist is less than the y-coordinate of the shoulder (remember, in image coordinates, smaller y means higher up on the screen).
 
 cap.release()
 cv2.destroyAllWindows()
